@@ -44,8 +44,7 @@ Your program will be tested on these and several other mazes during the grading 
 
 Your first goal should be to create a working `Maze` class. This class describes a maze object with all of the attributes needed to describe a maze. 
 1. Think about what class variables are needed to describe one of the test mazes. 
-2. Start by copying all the method call signatures from the `DisplayableMaze` interface and begin to fi
-ll them out (i.e., make stubs) 
+2. Start by copying all the method call signatures from the `DisplayableMaze` interface and begin to fill them out (i.e., make stubs) 
 3. Add the appropriate instance variables, including a variable `mazeGrid` storing the maze contents as a **2D array** (an array of arrays) of type `MazeContents`. 
 4. Fill out the getter methods (`getStart`, `getFinish`, `getContents`)
 5. Write `isExplorable`. For this method, think about what characteristics would make a `MazeLocation` exporable versus not worth exploring-- do you want to explore off the edge of the maze? Places you've already been? Walls?

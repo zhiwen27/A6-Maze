@@ -13,6 +13,10 @@ class SolveMaze {
     }
     return file;
   }
+
+  public static void solve(MazeLocation l){
+
+  }
   
   public static void main(String[] args) {
     if(args.length <= 0){
@@ -21,7 +25,9 @@ class SolveMaze {
     }
     Scanner file = readMaze(args[0]);
     
-    // Maze maze = new Maze();
-    // MazeViewer viewer = new MazeViewer(maze);
+    Maze maze = new Maze();
+    maze.initDemoMaze();
+    SolveMaze.solve(maze.getStart());
+    MazeViewer viewer = new MazeViewer(maze);
   }
 }
