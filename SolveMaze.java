@@ -16,7 +16,7 @@ class SolveMaze {
 
   public static Boolean solve(MazeLocation currentLocation, Maze maze, Boolean reach, MazeViewer mazeViewer){
     mazeViewer = new MazeViewer(maze);
-    try { Thread.sleep(500);	} catch (InterruptedException e) {};
+    try { Thread.sleep(250);	} catch (InterruptedException e) {};
     if (currentLocation.equals(maze.finish)){
       maze.mazeGrid[currentLocation.getRow()][currentLocation.getCol()] = MazeContents.PATH;
       System.err.println("You've reached the end of the maze!");
@@ -31,24 +31,36 @@ class SolveMaze {
       if (!reach){
         maze.mazeGrid[currentLocation.getRow()][currentLocation.getCol()] = MazeContents.PATH;
         reach = solve(currentLocation.neighbor(MazeDirection.SOUTH),maze,reach,mazeViewer);
+        if (!reach){
+          maze.mazeGrid[currentLocation.getRow()][currentLocation.getCol()] = MazeContents.VISITED;
+        }
       }
     }
     if (maze.checkExplorable(currentLocation.neighbor(MazeDirection.NORTH).getRow(), currentLocation.neighbor(MazeDirection.NORTH).getCol())){
       if (!reach){
         maze.mazeGrid[currentLocation.getRow()][currentLocation.getCol()] = MazeContents.PATH;
         reach = solve(currentLocation.neighbor(MazeDirection.NORTH),maze,reach,mazeViewer);
+        if (!reach){
+          maze.mazeGrid[currentLocation.getRow()][currentLocation.getCol()] = MazeContents.VISITED;
+        }
       }
     }
     if (maze.checkExplorable(currentLocation.neighbor(MazeDirection.EAST).getRow(), currentLocation.neighbor(MazeDirection.EAST).getCol())){
       if (!reach){
         maze.mazeGrid[currentLocation.getRow()][currentLocation.getCol()] = MazeContents.PATH;
         reach = solve(currentLocation.neighbor(MazeDirection.EAST),maze,reach,mazeViewer);
+        if (!reach){
+          maze.mazeGrid[currentLocation.getRow()][currentLocation.getCol()] = MazeContents.VISITED;
+        }
       }
     }
     if (maze.checkExplorable(currentLocation.neighbor(MazeDirection.WEST).getRow(), currentLocation.neighbor(MazeDirection.WEST).getCol())){
       if (!reach){
         maze.mazeGrid[currentLocation.getRow()][currentLocation.getCol()] = MazeContents.PATH;
         reach = solve(currentLocation.neighbor(MazeDirection.WEST),maze,reach,mazeViewer);
+        if (!reach){
+          maze.mazeGrid[currentLocation.getRow()][currentLocation.getCol()] = MazeContents.VISITED;
+        }
       }
     }
     else{
