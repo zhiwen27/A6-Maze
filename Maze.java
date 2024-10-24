@@ -4,7 +4,6 @@ public class Maze implements DisplayableMaze{
   public int height;
   public int width;
   public MazeContents[][] mazeGrid;
-  //public MazeLocation[][] mazeLocations;
   public MazeLocation start;
   public MazeLocation finish;
   

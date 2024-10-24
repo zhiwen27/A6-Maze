@@ -14,7 +14,9 @@ class SolveMaze {
     return file;
   }
 
-  public static Boolean solve(MazeLocation currentLocation, Maze maze, Boolean reach){
+  public static Boolean solve(MazeLocation currentLocation, Maze maze, Boolean reach, MazeViewer mazeViewer){
+    mazeViewer = new MazeViewer(maze);
+    try { Thread.sleep(500);	} catch (InterruptedException e) {};
     if (currentLocation.equals(maze.finish)){
       maze.mazeGrid[currentLocation.getRow()][currentLocation.getCol()] = MazeContents.PATH;
       System.err.println("You've reached the end of the maze!");
@@ -22,36 +24,38 @@ class SolveMaze {
       return reach;
     }
     if(!maze.checkExplorable(currentLocation.getRow(), currentLocation.getCol())){
-      maze.mazeGrid[currentLocation.getRow()][currentLocation.getCol()] = MazeContents.DEAD_END;
-      System.err.println("This is not the correct path to reach the Finish.");
       return reach;
     }
     maze.mazeGrid[currentLocation.getRow()][currentLocation.getCol()] = MazeContents.VISITED;
     if (maze.checkExplorable(currentLocation.neighbor(MazeDirection.SOUTH).getRow(), currentLocation.neighbor(MazeDirection.SOUTH).getCol())){
       if (!reach){
         maze.mazeGrid[currentLocation.getRow()][currentLocation.getCol()] = MazeContents.PATH;
-        reach = solve(currentLocation.neighbor(MazeDirection.SOUTH),maze,reach);
+        reach = solve(currentLocation.neighbor(MazeDirection.SOUTH),maze,reach,mazeViewer);
       }
     }
     if (maze.checkExplorable(currentLocation.neighbor(MazeDirection.NORTH).getRow(), currentLocation.neighbor(MazeDirection.NORTH).getCol())){
       if (!reach){
         maze.mazeGrid[currentLocation.getRow()][currentLocation.getCol()] = MazeContents.PATH;
-        reach = solve(currentLocation.neighbor(MazeDirection.NORTH),maze,reach);
+        reach = solve(currentLocation.neighbor(MazeDirection.NORTH),maze,reach,mazeViewer);
       }
     }
     if (maze.checkExplorable(currentLocation.neighbor(MazeDirection.EAST).getRow(), currentLocation.neighbor(MazeDirection.EAST).getCol())){
       if (!reach){
         maze.mazeGrid[currentLocation.getRow()][currentLocation.getCol()] = MazeContents.PATH;
-        reach = solve(currentLocation.neighbor(MazeDirection.EAST),maze,reach);
+        reach = solve(currentLocation.neighbor(MazeDirection.EAST),maze,reach,mazeViewer);
       }
     }
     if (maze.checkExplorable(currentLocation.neighbor(MazeDirection.WEST).getRow(), currentLocation.neighbor(MazeDirection.WEST).getCol())){
       if (!reach){
         maze.mazeGrid[currentLocation.getRow()][currentLocation.getCol()] = MazeContents.PATH;
-        reach = solve(currentLocation.neighbor(MazeDirection.WEST),maze,reach);
+        reach = solve(currentLocation.neighbor(MazeDirection.WEST),maze,reach,mazeViewer);
       }
     }
-    // Animation?
+    else{
+      if (!reach){
+        maze.mazeGrid[currentLocation.getRow()][currentLocation.getCol()] = MazeContents.DEAD_END;
+      }
+    }
     return reach;
   }
   
@@ -64,10 +68,10 @@ class SolveMaze {
     
     Maze maze = new Maze();
     maze.initDemoMaze();
-    SolveMaze.solve(maze.getStart(),maze,false);
-    if (!SolveMaze.solve(maze.getStart(),maze,false)){
+    MazeViewer mazeViewer = new MazeViewer(maze);
+    Boolean solved = SolveMaze.solve(maze.getStart(),maze,false,mazeViewer);
+    if (!solved){
       System.err.println("You can't find a path for this maze.");
     }
-    MazeViewer viewer = new MazeViewer(maze);
   }
 }
