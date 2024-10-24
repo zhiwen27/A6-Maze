@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 class SolveMaze {
@@ -72,14 +73,14 @@ class SolveMaze {
   }
   
   public static void main(String[] args) {
-    // if(args.length <= 0){
-    //   System.err.println("Please provide the name of the maze file.");
-    //   System.exit(-1);
-    // }
-    // Scanner file = readMaze(args[0]);
+    if(args.length <= 0){
+      System.err.println("Please provide the name of the maze file.");
+      System.exit(-1);
+    }
+    Scanner file = readMaze(args[0]);
     
     Maze maze = new Maze();
-    maze.initDemoMaze();
+    maze.initDemoMaze(file);
     MazeViewer mazeViewer = new MazeViewer(maze);
     Boolean solved = SolveMaze.solve(maze.getStart(),maze,false,mazeViewer);
     if (!solved){
