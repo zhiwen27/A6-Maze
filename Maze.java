@@ -4,6 +4,7 @@ public class Maze implements DisplayableMaze{
   public int height;
   public int width;
   public MazeContents[][] mazeGrid;
+  //public MazeLocation[][] mazeLocations;
   public MazeLocation start;
   public MazeLocation finish;
   
@@ -51,7 +52,12 @@ public class Maze implements DisplayableMaze{
 
   /** @return return True or False to indicate whether the maze grid is explorable at row i, column j */
   public Boolean checkExplorable(int i, int j){
-    return this.mazeGrid[i][j].isExplorable;
+    if (this.getContents(i, j) == MazeContents.OPEN){
+      return true;
+    }
+    else{
+      return false;
+    }
   }
 
   /** @return location of maze start point */
@@ -64,7 +70,6 @@ public class Maze implements DisplayableMaze{
     return this.finish;
   }
 
-  // ❗️write isExplorable?
   public static void main(String[] args) {
     Maze test = new Maze();
     test.initDemoMaze();
