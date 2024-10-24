@@ -36,8 +36,6 @@ class SolveMaze {
     // base case: if reached the end of the maze, set that as part of the PATH and return true
     if (currentLocation.equals(maze.finish)){
       maze.mazeGrid[currentLocation.getRow()][currentLocation.getCol()] = MazeContents.PATH;
-      // print out a message that says the solution exits
-      System.err.println("You've reached the end of the maze!");
       reach = true;
       return reach;
     }
@@ -117,9 +115,12 @@ class SolveMaze {
     maze.initDemoMaze(file);
     MazeViewer mazeViewer = new MazeViewer(maze);
     Boolean solved = SolveMaze.solve(maze.getStart(),maze,false,mazeViewer);
-    // print out a solution saying the solution doesn't exit
+    // print out a message saying whether the solution exits
     if (!solved){
-      System.err.println("You can't find a path for this maze.");
+      System.err.println("You can't find a solution for this maze.");
+    }
+    else{
+      System.err.println("You can find a solution for this maze.");
     }
   }
 }
