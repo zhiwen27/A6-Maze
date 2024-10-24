@@ -24,11 +24,10 @@ class SolveMaze {
       reach = true;
       return reach;
     }
-    if(!maze.checkExplorable(currentLocation.getRow(), currentLocation.getCol())){
+    if (!maze.checkExplorable(currentLocation.getRow(), currentLocation.getCol())){
       return reach;
     }
-    //maze.mazeGrid[currentLocation.getRow()][currentLocation.getCol()] = MazeContents.VISITED;
-    if (maze.checkExplorable(currentLocation.neighbor(MazeDirection.SOUTH).getRow(), currentLocation.neighbor(MazeDirection.SOUTH).getCol())){
+    if ((currentLocation.neighbor(MazeDirection.SOUTH).getRow() < maze.height) && (maze.checkExplorable(currentLocation.neighbor(MazeDirection.SOUTH).getRow(), currentLocation.neighbor(MazeDirection.SOUTH).getCol()))){
       if (!reach){
         maze.mazeGrid[currentLocation.getRow()][currentLocation.getCol()] = MazeContents.VISITED;
         reach = solve(currentLocation.neighbor(MazeDirection.SOUTH),maze,reach,mazeViewer);
@@ -40,7 +39,7 @@ class SolveMaze {
         }
       }
     }
-    if (maze.checkExplorable(currentLocation.neighbor(MazeDirection.NORTH).getRow(), currentLocation.neighbor(MazeDirection.NORTH).getCol())){
+    if ((currentLocation.neighbor(MazeDirection.NORTH).getRow() >= 0) && (maze.checkExplorable(currentLocation.neighbor(MazeDirection.NORTH).getRow(), currentLocation.neighbor(MazeDirection.NORTH).getCol()))){
       if (!reach){
         maze.mazeGrid[currentLocation.getRow()][currentLocation.getCol()] = MazeContents.VISITED;
         reach = solve(currentLocation.neighbor(MazeDirection.NORTH),maze,reach,mazeViewer);
@@ -52,7 +51,7 @@ class SolveMaze {
         }
       }
     }
-    if (maze.checkExplorable(currentLocation.neighbor(MazeDirection.EAST).getRow(), currentLocation.neighbor(MazeDirection.EAST).getCol())){
+    if ((currentLocation.neighbor(MazeDirection.EAST).getCol() < maze.width) && (maze.checkExplorable(currentLocation.neighbor(MazeDirection.EAST).getRow(), currentLocation.neighbor(MazeDirection.EAST).getCol()))){
       if (!reach){
         maze.mazeGrid[currentLocation.getRow()][currentLocation.getCol()] = MazeContents.VISITED;
         reach = solve(currentLocation.neighbor(MazeDirection.EAST),maze,reach,mazeViewer);
@@ -64,7 +63,7 @@ class SolveMaze {
         }
       }
     }
-    if (maze.checkExplorable(currentLocation.neighbor(MazeDirection.WEST).getRow(), currentLocation.neighbor(MazeDirection.WEST).getCol())){
+    if ((currentLocation.neighbor(MazeDirection.WEST).getCol() >= 0) && (maze.checkExplorable(currentLocation.neighbor(MazeDirection.WEST).getRow(), currentLocation.neighbor(MazeDirection.WEST).getCol()))){
       if (!reach){
         maze.mazeGrid[currentLocation.getRow()][currentLocation.getCol()] = MazeContents.VISITED;
         reach = solve(currentLocation.neighbor(MazeDirection.WEST),maze,reach,mazeViewer);
