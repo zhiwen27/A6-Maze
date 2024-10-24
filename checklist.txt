@@ -10,37 +10,37 @@ your work, please indicate the status of each item
 
 ## Assignment Points:
 
-_____ 1 pt: Maze class implements DisplayableMaze interface
+__YES___ 1 pt: Maze class implements DisplayableMaze interface
 
-_____ 2 pts: `solve` method correctly determines if solution exists
+__YES___ 2 pts: `solve` method correctly determines if solution exists
 
-_____ 2 pts: `solve` method uses recursion
+__YES___ 2 pts: `solve` method uses recursion
 
-_____ 1 pts: `isExplorable` correctly identifies explorable locations
+__YES___ 1 pts: `isExplorable` correctly identifies explorable locations
 
-_____ 2 pts: recursive style is simple and direct
+__YES___ 2 pts: recursive style is simple and direct
 
-_____ 2 pts: Encodes maze contained in a text file
+__YES___ 2 pts: Encodes maze contained in a text file
 
 
 ## General Items:
 
-_____ 4 pts: Program compiles without errors or warnings
+__YES___ 4 pts: Program compiles without errors or warnings
 
-_____ 2 pts: Executes fully & consistently without crashing (exception/freeze)
+__YES___ 2 pts: Executes fully & consistently without crashing (exception/freeze)
 
-_____ 2 pt: Complies with style guidelines (missing items 1 pt each):
+__YES___ 2 pt: Complies with style guidelines (missing items 1 pt each):
 
-      _____ Classes & class members all have Javadoc header comments
+      __YES___ Classes & class members all have Javadoc header comments
 
-      _____ Clear and consistent indentation of bracketed sections
+      __YES___ Clear and consistent indentation of bracketed sections
 
-      _____ Adheres to Java conventions on naming & capitalization
+      __YES___ Adheres to Java conventions on naming & capitalization
 
-      _____ Methods & variables all have clear and accurate names
+      __YES___ Methods & variables all have clear and accurate names
 
-      _____ Methods avoid confusing side effects
+      __YES___ Methods avoid confusing side effects
 
-_____ 1 pt: All required files included with submission & named correctly (including completed checklist file)
+__YES___ 1 pt: All required files included with submission & named correctly (including completed checklist file)
 
-_____ 1 pt: readme.md contains reflection on the assignment
+__YES___ 1 pt: readme.md contains reflection on the assignment
