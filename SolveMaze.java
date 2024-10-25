@@ -32,7 +32,7 @@ class SolveMaze {
     // display maze
     mazeViewer = new MazeViewer(maze);
     // set the delayed time
-    try { Thread.sleep(100);	} catch (InterruptedException e) {};
+    try { Thread.sleep(5);	} catch (InterruptedException e) {};
     // base case: if reached the end of the maze, set that as part of the PATH and return true
     if (currentLocation.equals(maze.finish)){
       maze.mazeGrid[currentLocation.getRow()][currentLocation.getCol()] = MazeContents.PATH;
