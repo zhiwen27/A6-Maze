@@ -4,7 +4,7 @@
 
 Programming Partner Name: Emily (for prototype).
 
-Other Collaborators (and kudos to helpful members of the class): Jessica, Elaine.
+Other Collaborators (and kudos to helpful members of the class): No.
 
 Any references used besides JavaDoc and course materials: No.
 

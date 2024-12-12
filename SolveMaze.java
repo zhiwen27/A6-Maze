@@ -1,5 +1,5 @@
 import java.io.*;
-import java.util.ArrayList;
+// import java.util.ArrayList;
 import java.util.Scanner;
 
 class SolveMaze {
@@ -19,6 +19,9 @@ class SolveMaze {
     }
     return file;
   }
+
+  // check bounds outside
+  // Window should not be re-initialized in each recursive call?
 
   /**
    * The method that solves maze with recursion.
