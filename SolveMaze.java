@@ -20,9 +20,6 @@ class SolveMaze {
     return file;
   }
 
-  // check bounds outside
-  // Window should not be re-initialized in each recursive call?
-
   /**
    * The method that solves maze with recursion.
    * @param currentLocation current location in type MazeLocation
@@ -31,9 +28,9 @@ class SolveMaze {
    * @param mazeViewer maze viewer
    * @return whether has reached the end of the maze
    */
-  public static Boolean solve(MazeLocation currentLocation, Maze maze, Boolean reach, MazeViewer mazeViewer){
+  public static Boolean solve(MazeLocation currentLocation, Maze maze, Boolean reach){
     // display maze
-    mazeViewer = new MazeViewer(maze);
+
     // set the delayed time
     try { Thread.sleep(5);	} catch (InterruptedException e) {};
     // base case: if reached the end of the maze, set that as part of the PATH and return true
@@ -50,7 +47,7 @@ class SolveMaze {
     if ((currentLocation.neighbor(MazeDirection.SOUTH).getRow() < maze.height) && (maze.checkExplorable(currentLocation.neighbor(MazeDirection.SOUTH).getRow(), currentLocation.neighbor(MazeDirection.SOUTH).getCol()))){
       if (!reach){
         maze.mazeGrid[currentLocation.getRow()][currentLocation.getCol()] = MazeContents.VISITED;
-        reach = solve(currentLocation.neighbor(MazeDirection.SOUTH),maze,reach,mazeViewer);
+        reach = solve(currentLocation.neighbor(MazeDirection.SOUTH),maze,reach);
         if (!reach){
           maze.mazeGrid[currentLocation.getRow()][currentLocation.getCol()] = MazeContents.DEAD_END;
         }
@@ -63,7 +60,7 @@ class SolveMaze {
     if ((currentLocation.neighbor(MazeDirection.NORTH).getRow() >= 0) && (maze.checkExplorable(currentLocation.neighbor(MazeDirection.NORTH).getRow(), currentLocation.neighbor(MazeDirection.NORTH).getCol()))){
       if (!reach){
         maze.mazeGrid[currentLocation.getRow()][currentLocation.getCol()] = MazeContents.VISITED;
-        reach = solve(currentLocation.neighbor(MazeDirection.NORTH),maze,reach,mazeViewer);
+        reach = solve(currentLocation.neighbor(MazeDirection.NORTH),maze,reach);
         if (!reach){
           maze.mazeGrid[currentLocation.getRow()][currentLocation.getCol()] = MazeContents.DEAD_END;
         }
@@ -76,7 +73,7 @@ class SolveMaze {
     if ((currentLocation.neighbor(MazeDirection.EAST).getCol() < maze.width) && (maze.checkExplorable(currentLocation.neighbor(MazeDirection.EAST).getRow(), currentLocation.neighbor(MazeDirection.EAST).getCol()))){
       if (!reach){
         maze.mazeGrid[currentLocation.getRow()][currentLocation.getCol()] = MazeContents.VISITED;
-        reach = solve(currentLocation.neighbor(MazeDirection.EAST),maze,reach,mazeViewer);
+        reach = solve(currentLocation.neighbor(MazeDirection.EAST),maze,reach);
         if (!reach){
           maze.mazeGrid[currentLocation.getRow()][currentLocation.getCol()] = MazeContents.DEAD_END;
         }
@@ -89,7 +86,7 @@ class SolveMaze {
     if ((currentLocation.neighbor(MazeDirection.WEST).getCol() >= 0) && (maze.checkExplorable(currentLocation.neighbor(MazeDirection.WEST).getRow(), currentLocation.neighbor(MazeDirection.WEST).getCol()))){
       if (!reach){
         maze.mazeGrid[currentLocation.getRow()][currentLocation.getCol()] = MazeContents.VISITED;
-        reach = solve(currentLocation.neighbor(MazeDirection.WEST),maze,reach,mazeViewer);
+        reach = solve(currentLocation.neighbor(MazeDirection.WEST),maze,reach);
         if (!reach){
           maze.mazeGrid[currentLocation.getRow()][currentLocation.getCol()] = MazeContents.DEAD_END;
         }
@@ -117,7 +114,7 @@ class SolveMaze {
     Maze maze = new Maze();
     maze.initDemoMaze(file);
     MazeViewer mazeViewer = new MazeViewer(maze);
-    Boolean solved = SolveMaze.solve(maze.getStart(),maze,false,mazeViewer);
+    Boolean solved = SolveMaze.solve(maze.getStart(),maze,false);
     // print out a message saying whether the solution exits
     if (!solved){
       System.err.println("You can't find a solution for this maze.");
