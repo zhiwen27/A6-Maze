@@ -1,5 +1,4 @@
 import java.io.*;
-// import java.util.ArrayList;
 import java.util.Scanner;
 
 class SolveMaze {
@@ -29,8 +28,6 @@ class SolveMaze {
    * @return whether has reached the end of the maze
    */
   public static Boolean solve(MazeLocation currentLocation, Maze maze, Boolean reach){
-    // display maze
-
     // set the delayed time
     try { Thread.sleep(5);	} catch (InterruptedException e) {};
     // base case: if reached the end of the maze, set that as part of the PATH and return true
