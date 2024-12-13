@@ -20,6 +20,21 @@ class SolveMaze {
   }
 
   /**
+   * Check if current location is within the bounds
+   * @param currentLocation current location
+   * @param maze maze
+   * @return if current location is within the bounds
+   */
+  public static boolean checkBoundary(MazeLocation currentLocation, Maze maze){
+    if ((currentLocation.getRow() >= 0) && (currentLocation.getRow() < maze.height) && (currentLocation.getCol() >= 0) && (currentLocation.getCol() < maze.width)){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
+  /**
    * The method that solves maze with recursion.
    * @param currentLocation current location in type MazeLocation
    * @param maze the maze
@@ -40,62 +55,23 @@ class SolveMaze {
     if (!maze.checkExplorable(currentLocation.getRow(), currentLocation.getCol())){
       return reach;
     }
-    // check if go south is within boundary and explorable, if so, go south
-    if ((currentLocation.neighbor(MazeDirection.SOUTH).getRow() < maze.height) && (maze.checkExplorable(currentLocation.neighbor(MazeDirection.SOUTH).getRow(), currentLocation.neighbor(MazeDirection.SOUTH).getCol()))){
-      if (!reach){
-        maze.mazeGrid[currentLocation.getRow()][currentLocation.getCol()] = MazeContents.VISITED;
-        reach = solve(currentLocation.neighbor(MazeDirection.SOUTH),maze,reach);
+    for (MazeDirection d: MazeDirection.values()){
+      if ((SolveMaze.checkBoundary(currentLocation.neighbor(d), maze)) && maze.checkExplorable(currentLocation.neighbor(d).getRow(), currentLocation.neighbor(d).getCol())){
+        if (!reach){
+          maze.mazeGrid[currentLocation.getRow()][currentLocation.getCol()] = MazeContents.VISITED;
+          reach = solve(currentLocation.neighbor(d),maze,reach);
+          if (!reach){
+            maze.mazeGrid[currentLocation.getRow()][currentLocation.getCol()] = MazeContents.DEAD_END;
+          }
+          else{
+            maze.mazeGrid[currentLocation.getRow()][currentLocation.getCol()] = MazeContents.PATH;
+          }
+        }
+      }
+      else{
         if (!reach){
           maze.mazeGrid[currentLocation.getRow()][currentLocation.getCol()] = MazeContents.DEAD_END;
         }
-        else{
-          maze.mazeGrid[currentLocation.getRow()][currentLocation.getCol()] = MazeContents.PATH;
-        }
-      }
-    }
-    // check if go north is within boundary and explorable, if so, go north
-    if ((currentLocation.neighbor(MazeDirection.NORTH).getRow() >= 0) && (maze.checkExplorable(currentLocation.neighbor(MazeDirection.NORTH).getRow(), currentLocation.neighbor(MazeDirection.NORTH).getCol()))){
-      if (!reach){
-        maze.mazeGrid[currentLocation.getRow()][currentLocation.getCol()] = MazeContents.VISITED;
-        reach = solve(currentLocation.neighbor(MazeDirection.NORTH),maze,reach);
-        if (!reach){
-          maze.mazeGrid[currentLocation.getRow()][currentLocation.getCol()] = MazeContents.DEAD_END;
-        }
-        else{
-          maze.mazeGrid[currentLocation.getRow()][currentLocation.getCol()] = MazeContents.PATH;
-        }
-      }
-    }
-    // check if go east is within boundary and explorable, if so, go east
-    if ((currentLocation.neighbor(MazeDirection.EAST).getCol() < maze.width) && (maze.checkExplorable(currentLocation.neighbor(MazeDirection.EAST).getRow(), currentLocation.neighbor(MazeDirection.EAST).getCol()))){
-      if (!reach){
-        maze.mazeGrid[currentLocation.getRow()][currentLocation.getCol()] = MazeContents.VISITED;
-        reach = solve(currentLocation.neighbor(MazeDirection.EAST),maze,reach);
-        if (!reach){
-          maze.mazeGrid[currentLocation.getRow()][currentLocation.getCol()] = MazeContents.DEAD_END;
-        }
-        else{
-          maze.mazeGrid[currentLocation.getRow()][currentLocation.getCol()] = MazeContents.PATH;
-        }
-      }
-    }
-    // check if go west is within boundary and explorable, if so, go west
-    if ((currentLocation.neighbor(MazeDirection.WEST).getCol() >= 0) && (maze.checkExplorable(currentLocation.neighbor(MazeDirection.WEST).getRow(), currentLocation.neighbor(MazeDirection.WEST).getCol()))){
-      if (!reach){
-        maze.mazeGrid[currentLocation.getRow()][currentLocation.getCol()] = MazeContents.VISITED;
-        reach = solve(currentLocation.neighbor(MazeDirection.WEST),maze,reach);
-        if (!reach){
-          maze.mazeGrid[currentLocation.getRow()][currentLocation.getCol()] = MazeContents.DEAD_END;
-        }
-        else{
-          maze.mazeGrid[currentLocation.getRow()][currentLocation.getCol()] = MazeContents.PATH;
-        }
-      }
-    }
-    // mark the cell as dead-end if you can't find a way from here
-    else{
-      if (!reach){
-        maze.mazeGrid[currentLocation.getRow()][currentLocation.getCol()] = MazeContents.DEAD_END;
       }
     }
     return reach;
